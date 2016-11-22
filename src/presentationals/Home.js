@@ -1,21 +1,24 @@
 import React from 'react'
-import {View} from 'react-native'
+import {Image} from 'react-native'
 import DataContainer from '../containers/DataContainer'
 
 const styles = {
-  main: {
+    background: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
+    width: null,
+    height: null,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 54
   }
 }
 
 class Home extends React.Component {
   render() {
     return (
-      <View style={styles.main}>
+      <Image source={require('../images/Background.jpg')} style={styles.background}>
         <DataContainer />
-      </View>
+      </Image>
     )
   }
 }

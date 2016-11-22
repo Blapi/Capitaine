@@ -12,7 +12,7 @@ function syncDataReducer(state = initialState, action) {
 		case REQUEST_START:
 			return {...state, requesting: true}
 		case REQUEST_END:
-			return {...state, requesting: false, flights: action.flights, planes: action.planes, airfields: action.airfields}
+			return {...state, requesting: false, flights: action.result.flights, planes: action.result.planes, airfields: action.result.airfields}
 		default:
 			return state
     }
