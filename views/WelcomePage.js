@@ -5,51 +5,81 @@ import {
   Text,
   View,
   Image,
-  Navigator
+  Navigator,
+  Dimensions,
+  Alert,
 } from 'react-native';
 
 import Button from 'react-native-button';
+import Carousel from 'react-native-looped-carousel';
 
 var login = ('S\'Identifier').toUpperCase();
 var signup = ('Créer un compte').toUpperCase();
 
+// Carousel defaults to full screen
+const { width, height } = Dimensions.get('window');
+
 class WelcomePage extends Component {
-  /* Use this for SplashScreen
-  componentWillMount() {
-    var navigator = this.props.navigator;
-    setTimeout(() => {
-      navigator.replace({
-        id: 'LoginPage',
-      });
-    }, 1000);
-  }*/
+   constructor(props) {
+    super(props);
+
+    this.state = {
+      size: { width , height },
+    };
+  }
+
+   _onLayoutDidChange(event) {
+    const layout = event.nativeEvent.layout;
+    this.setState({ size: { width: layout.width, height: layout.height } });
+  }
 
   render() {
     return (
       <Navigator renderScene={this.renderScene.bind(this)} />
     );
   }
-  
+
+  /* TODO: Margin top & bottom on the carousel view were made for nexus 6P, should be adaptive */
   renderScene() {
     return (
       <Image source={require('../img/background.jpg')} style={styles.background_img}>
         <View style={styles.container}>
-        <Image source={require('../img/logo.png')} style={styles.logo_img}/>
-          <Text style={{color: 'white', fontSize: 32, flex: 1}}>Capitaine</Text>
-          <Button
-            containerStyle={[styles.btn, styles.btn_signup]}
-            style={styles.btn_text}
-            onPress={this.handlePress.bind(this)}>
-            {signup}
-          </Button>
-          <Button
-            containerStyle={[styles.btn, styles.btn_login]}
-            style={styles.btn_text}
-            onPress={this.handlePress.bind(this)}>
-            {login}
-          </Button>
+          <Image source={require('../img/logo.png')} style={styles.logo_img} />
+          <Text style={styles.title}>Capitaine</Text>
+          <View style={{flex:1, marginBottom: 80, marginTop: 50}} onLayout={(e) => this._onLayoutDidChange(e)}>
+            <Carousel
+              delay={3000}
+              style={this.state.size}
+              bullets={true}
+              autoplay>
+            <View style={[styles.carousel, this.state.size]}>
+              <Text style={[styles.carousel_title]}>PRÉPAREZ</Text>
+              <Text style={[styles.carousel_txt]} numberOfLines={5}>Préparez votre vol décontracté en consultant votre trajet prédéfinit et la météo actuelle en directe</Text>
+            </View>
+            <View style={[styles.carousel, this.state.size]}>
+              <Text style={[styles.carousel_title]}>VOLEZ</Text>
+              <Text style={[styles.carousel_txt]}>Enregistrez vos conversations, partagez votre trajet et servez-vous des services aéronautiques à votre disposition</Text>
+            </View>
+            <View style={[styles.carousel, this.state.size]}>
+              <Text style={[styles.carousel_title]}>ATTERRISSEZ</Text>
+              <Text style={[styles.carousel_txt]}>Atterrissez léger et remplissez votre carnet de vol avec simplicité</Text>
+            </View>
+          </Carousel>
         </View>
-      </Image>
+        <Button
+          containerStyle={[styles.btn, styles.btn_signup]}
+          style={styles.btn_text}
+          onPress={this.handlePress.bind(this)}>
+          {signup}
+        </Button>
+        <Button
+          containerStyle={[styles.btn, styles.btn_login]}
+          style={styles.btn_text}
+          onPress={this.handlePress.bind(this)}>
+          {login}
+        </Button>
+      </View>
+    </Image>
     );
   }
 
@@ -77,10 +107,18 @@ var styles = StyleSheet.create({
   },
   
   logo_img: {
-    flex: 1,
+    marginTop: 30,
     width: 80,
     height: 80,
     resizeMode: 'contain'
+  },
+  
+  title: {
+    fontFamily: '5thgradecursive',
+    color: 'white',
+    fontSize: 17,
+    marginTop: 10,
+    paddingRight: 10
   },
   
   btn_text: {
@@ -100,7 +138,28 @@ var styles = StyleSheet.create({
   
   btn_signup:{
     backgroundColor: '#75bec6',
-  }
+  },
+  
+  carousel: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  carousel_title: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+  
+  carousel_txt: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 16,
+    marginTop: 10,
+    marginLeft: 50,
+    marginRight: 50,
+    //flexWrap: 'wrap'
+  },
 });
 
 module.exports = WelcomePage;
