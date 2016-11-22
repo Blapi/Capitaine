@@ -14,14 +14,15 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-var SplashPage = require('./views/WelcomePage');
+var WelcomePage = require('./views/WelcomePage');
 var LoginPage = require('./views/LoginPage');
+var SplashPage = require('./views/SplashPage');
 
 class Project extends Component {
   render() {
     return (
       <Navigator
-          initialRoute={{id: 'WelcomePage', name: 'Index'}}
+          initialRoute={{id: 'SplashPage', name: 'Index'}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) => {
             if (route.sceneConfig) {
@@ -34,9 +35,15 @@ class Project extends Component {
 
   renderScene(route, navigator) {
       var routeId = route.id;
-      if (routeId === 'WelcomePage') {
+      if (routeId === 'SplashPage') {
         return (
           <SplashPage
+            navigator={navigator} />
+        );
+      }
+      if (routeId === 'WelcomePage') {
+        return (
+          <WelcomePage
             navigator={navigator} />
         );
       }
