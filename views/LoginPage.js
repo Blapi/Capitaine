@@ -13,12 +13,12 @@ import {
 
 import Button from 'react-native-button';
 
-var login = 'S\'identifier'.toUpperCase()
+var login = 'S\'identifier'.toUpperCase();
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: 'Nom d\'utilisateur', password: 'Mot de passe' };
+    this.state = { user: '', password: '' };
   }
   
   render() {
@@ -32,31 +32,54 @@ class LoginPage extends Component {
     );
   }
   
+  // Text input surrounded by Views to override border color smh.
   renderScene(route, navigator) {
     return (
       <Image source={require('../img/background.jpg')} style={styles.background_img}>
         <View style={styles.container}>
-          <TextInput
-            style={{height: 40, borderColor: 'white', borderWidth: 1, color: 'white'}}
-            onChangeText={(user) => this.setState({user})}
-            value={this.state.user}
-          />
-          <TextInput
-            style={{height: 40, borderColor: 'white', borderWidth: 1, color: 'white'}}
-            onChangeText={(text) => this.setState({password})}
-            value={this.state.password}
-          />
+         <View style={{
+              backgroundColor: this.state.text,
+              borderBottomColor: 'white',
+              borderBottomWidth: 1,
+              paddingBottom: -10}}>
+            <TextInput
+              style={{height: 50, borderWidth: 1, color: 'white', borderBottomColor:'transparent'}}
+              onChangeText={(user) => this.setState({user})}
+              value={this.state.user}
+              autoCorrect={false}
+              placeholder={'Nom d\'utilisateur'}
+              placeholderTextColor={'#ffffffbb'}
+              multiline = {true}
+              numberOfLines = {1}
+              />
+        </View>
+        <View style={{
+              backgroundColor: this.state.text,
+              borderBottomColor: 'white',
+              borderBottomWidth: 1,
+              paddingBottom: -10}}>
+            <TextInput
+              style={{marginTop: 10, height: 50, borderWidth: 1, color: 'white'}}
+              onChangeText={(password) => this.setState({password})}
+              value={this.state.password}
+              autoCorrect={false}
+              placeholder={'Mot de passe'}
+              placeholderTextColor={'#ffffffbb'}
+              secureTextEntry={true}
+            />
+          </View>
           <Button
             containerStyle={[styles.btn_login]}
             style={styles.btn_text}
             onPress={this.handlePress.bind(this)}>
             {'Connexion'.toUpperCase()}
           </Button>
-          <TouchableHighlight
+          <TouchableHighlight style={{marginTop:30}}
               onPress={this.handlePress.bind(this)}>
-            <Text style={{color: 'white', marginTop: 30}}>Mot de passse oublié ?</Text>
+            <Text style={{color: 'white'}}>Mot de passse oublié ?</Text>
           </TouchableHighlight>
-          <Text style={{color: 'white'}}>Capitaine</Text>
+          <View style={{flex:1}}/>
+          <Text style={{color: 'white', fontFamily: '5thgradecursive'}}>Capitaine</Text>
         </View>
       </Image>
     );
@@ -76,10 +99,8 @@ var NavigationBarRouteMapper = {
       return null;
     } else {*/
       return (
-        <TouchableHighlight style={{flex: 1, justifyContent: 'center'}} onPress={() => navigator.pop()}>
-          <Text style={{color: 'white', fontSize: 16}}>
-            {'<-'}
-          </Text>
+        <TouchableHighlight style={{flex: 1, justifyContent: 'center'}} onPress={() => navigator.pop(0)}>
+          <Image source={require('../img/arrow.png')} style={{width: 50, height: 50}}/>
         </TouchableHighlight>
       );
     //}
@@ -123,7 +144,7 @@ var styles = StyleSheet.create({
   },
   
   btn_login: {
-    padding: 20,
+    padding: 15,
     backgroundColor: '#75bec6',
     alignSelf: 'stretch',
     marginTop: 40
