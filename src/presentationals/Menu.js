@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableHighlight} from 'react-native'
+import {View, Text, Image, TouchableHighlight, ToastAndroid} from 'react-native'
 import React from 'react'
 import {Actions} from 'react-native-router-flux'
 import Spinner from 'react-native-loading-spinner-overlay'
@@ -54,7 +54,7 @@ class Menu extends React.Component {
         <View>
           <TouchableHighlight
             style={styles.flexElement}
-            onPress={() => Actions.flightbook({flights: this.props.flights, planes: this.props.planes})}>
+            onPress={() => Actions.tracking()}>
             <Image source={require('../images/Home_suivi.jpg')} style={styles.image}>
               <Text style={styles.text}>SUIVI EN TEMPS RÉEL</Text>
             </Image>
@@ -68,7 +68,7 @@ class Menu extends React.Component {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.flexElement}
-            onPress={() => Actions.flightbook({flights: this.props.flights, planes: this.props.planes})}>
+            onPress={() => Actions.services()}>
             <Image source={require('../images/Home_service.jpg')} style={styles.image}>
               <Text style={styles.text}>SERVICES AÉRONAUTIQUES</Text>
             </Image>

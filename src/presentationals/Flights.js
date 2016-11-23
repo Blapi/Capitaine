@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, Image, TouchableHighlight, ScrollView, ToastAndroid} from 'react-native'
 import {vw} from 'react-native-viewport-units'
+import moment from 'moment'
 
 const colors = [
   '#0f363a',
@@ -8,25 +9,21 @@ const colors = [
 ]
 
 const flightCell = {
-  margin: 5,
-  borderStyle: 'solid',
-  borderWidth: 2,
   position: 'relative',
   alignItems: 'center',
   justifyContent: 'center',
-  opacity: 60
 }
 
 const styles = {
   scrollView: {
     position: 'relative',
-    marginLeft: 5,
-    marginRight: 5
+    marginLeft: 2 * vw,
+    marginRight: 2 * vw
   },
   flightList: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 5,
+    padding: 2 * vw,
     borderBottomWidth: 2,
     borderColor: 'lightblue',
     width: 100*vw
@@ -36,42 +33,44 @@ const styles = {
     textAlignVertical: 'center',
     textAlign: 'center',
     color: 'white',
+    fontSize: 10,
+    opacity: 1
   },
   smallCells: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: ((100 * vw) / 5) + 10,
-    height: ((100 * vw) / 5) + 10,
+    width: (31 * vw),
+    height: (31 * vw),
   },
   dateCell: {
     ...flightCell,
-    width: ((100 * vw) / 5) + 5,
-    height: ((100 * vw) / 5) + 5,
+    width: (30 * vw),
+    height: (30 * vw),
   },
   planeCell: {
     ...flightCell,
-    width: ((100 * vw) / 5) + 5,
-    height: ((100 * vw) / 5) + 5,
+    width: (30 * vw),
+    height: (30 * vw),
   },
   typeCell: {
     ...flightCell,
-    width: ((100 * vw) / 5) + 5,
-    height: ((100 * vw) / 5) + 5,
+    width: (14.5 * vw),
+    height: (14.5 * vw),
   },
   roleCell: {
     ...flightCell,
-    width: ((100 * vw) / 10) - 5,
-    height: ((100 * vw) / 10) - 5,
+    width: (14.5 * vw),
+    height: (14.5 * vw),
   },
   flightTimeCell: {
     ...flightCell,
-    width:  ((100 * vw) / 10) - 5,
-    height: ((100 * vw) / 10) - 5,
+    width:  (14.5 * vw),
+    height: (14.5 * vw),
   },
   landingCell: {
     ...flightCell,
-    width: ((100 * vw) / 10) - 5,
-    height: ((100 * vw) / 10) - 5,
+    width: (14.5 * vw),
+    height: (14.5 * vw),
   },
   background: {
     flex: 1,
@@ -80,6 +79,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 54
+  },
+  icon: {
+    width: 30,
+    height: 30
   }
 }
 
@@ -88,7 +91,7 @@ class Flights extends React.Component {
     return (
       <Image source={require('../images/Flightbook_Background.jpg')} style={styles.background}>
         <ScrollView style={styles.scrollView} >
-        {this.props.flights.map((flight, key) => {
+        {this.props.flights.slice(0, 8).map((flight, key)=> {
           return (
             <TouchableHighlight
               key={key}
@@ -96,62 +99,78 @@ class Flights extends React.Component {
               onPress={() => console.log(flight)}>
               <View style={styles.flightList} >
                 <TouchableHighlight
-                  onLongPress={() => ToastAndroid.show('Date', ToastAndroid.SHORT)}
+                  onLongPress={() => ToastAndroid.show('Date and Role', ToastAndroid.SHORT)}
                   onPress={() => console.log(flight)}
                   underlayColor='transparent'
-                  style={{width:styles.dateCell.width + 10, height:styles.dateCell.height + 10}}>
+                  style={{width:styles.dateCell.width + vw, height:styles.dateCell.height + vw, opacity: 0.8}}>
                   <View style={{...styles.dateCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                    <Text style={styles.textCell}>{flight.date}</Text>
+                    <Image source={require('../images/Icon_clock.png')} style={styles.icon}/>
+                    <Text style={styles.textCell}>{moment(flight.date, 'YYYY-MM-DD').format('DD/MM/YYYY')}</Text>
+                    {flight.role === 'EP'
+                    ?
+                    <Image source={require('../images/Icon_twoUsers.png')} style={styles.icon}/>
+                    :
+                    <Image source={require('../images/Icon_oneUser.png')} style={styles.icon}/>}
+                    <Text style={styles.textCell}>{flight.role}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onLongPress={() => ToastAndroid.show('Plane informations', ToastAndroid.SHORT)}
                   onPress={() => console.log(flight)}
                   underlayColor='transparent'
-                  style={{width:styles.dateCell.width + 10, height:styles.dateCell.height + 10}} >
+                  style={{width:styles.planeCell.width + vw, height:styles.planeCell.height + vw, opacity: 0.8}} >
                   <View style={{...styles.planeCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
+                    <Image source={require('../images/Icon_plane.png')} style={styles.icon}/>
                     {this.props.planes.map((plane, key) => {
                       if (plane.id === flight.plane) {
-                        return (<Text key={key} style={styles.textCell}>{plane.type.type}{'\n\n'}{plane.registration}</Text>)
+                        return (<Text key={key} style={styles.textCell}>{plane.type.type}{'\n'}{plane.registration}</Text>)
                       }
                     })}
                   </View>
                 </TouchableHighlight>
-                <TouchableHighlight
-                  onLongPress={() => ToastAndroid.show('Type', ToastAndroid.SHORT)}
-                  onPress={() => console.log(flight)}
-                  underlayColor='transparent'
-                  style={{width:styles.typeCell.width + 10, height:styles.typeCell.height + 10}}>
-                  <View style={{...styles.typeCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                    <Text style={styles.textCell}>{flight.flight_type}</Text>
-                  </View>
-                </TouchableHighlight>
                 <View style={styles.smallCells}>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Role', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show('Time of the day', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
-                    style={{width:styles.roleCell.width + 10, height:styles.roleCell.height + 10}}>
+                    style={{width:styles.roleCell.width + vw, height:styles.roleCell.height + vw, opacity: 0.8}}>
                     <View style={{...styles.roleCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                      <Text style={styles.textCell}>{flight.role}</Text>
+                      {flight.day_landing !== undefined
+                      ? <Image source={require('../images/Icon_sun.png')} style={styles.icon}/>
+                      : <Image source={require('../images/Icon_moon.png')} style={styles.icon}/>}
                     </View>
                   </TouchableHighlight>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Flight time (mins)', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show('Flight duration', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
-                    style={{width:styles.flightTimeCell.width + 10, height:styles.flightTimeCell.height + 10}}>
+                    style={{width:styles.flightTimeCell.width + vw, height:styles.flightTimeCell.height + vw, opacity: 0.8}}>
                     <View style={{...styles.flightTimeCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                      <Text style={styles.textCell}>{flight.flight_time}</Text>
+                      <Text style={styles.textCell}>
+                        {moment.duration(flight.flight_time, 'minutes').hours()}h{moment.duration(flight.flight_time, 'minutes').minutes() == 0
+                                                                                  ? moment.duration(flight.flight_time, 'minutes').minutes() + '0'
+                                                                                  : (moment.duration(flight.flight_time, 'minutes').minutes() < 10
+                                                                                    ? '0' + moment.duration(flight.flight_time, 'minutes').minutes()
+                                                                                    : moment.duration(flight.flight_time, 'minutes').minutes())}
+                      </Text>
+                    </View>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    onLongPress={() => ToastAndroid.show('Type', ToastAndroid.SHORT)}
+                    onPress={() => console.log(flight)}
+                    underlayColor='transparent'
+                    style={{width:styles.typeCell.width + vw, height:styles.typeCell.height + vw, opacity: 0.8}}>
+                    <View style={{...styles.typeCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
+                      <Text style={styles.textCell}>{flight.flight_type}</Text>
                     </View>
                   </TouchableHighlight>
                   <TouchableHighlight
                     onLongPress={() => ToastAndroid.show('Landing', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
-                    style={{width:styles.landingCell.width + 10, height:styles.landingCell.height + 10}}>
+                    style={{width:styles.landingCell.width + vw, height:styles.landingCell.height + vw, opacity: 0.8}}>
                     <View style={{...styles.landingCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                      <Text style={styles.textCell}>{flight.day_landing}</Text>
+                      <Text style={styles.textCell}>{flight.day_landing !== undefined ? flight.day_landing : flight.night_landing}</Text>
                     </View>
                   </TouchableHighlight>
                 </View>
