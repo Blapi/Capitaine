@@ -42,7 +42,7 @@ class WelcomePage extends Component {
   /* TODO: Margin top & bottom on the carousel view were made for nexus 6P, should be adaptive */
   renderScene() {
     return (
-      <Image source={require('../img/background.jpg')} style={styles.background_img}>
+      <Image source={require('../img/background.jpg')} style={styles.background_img} resizeMode='cover'>
         <View style={styles.container}>
           <Image source={require('../img/logo.png')} style={styles.logo_img} />
           <Text style={styles.title}>Capitaine</Text>
@@ -103,7 +103,6 @@ var styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: 'cover'
   },
   
   logo_img: {

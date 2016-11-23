@@ -20,8 +20,8 @@ class SplashPage extends Component {
 
   render() {
     return (
-      <Image source={require('../img/background_splash.jpg')} style={styles.background_img}>
-        <Image source={require('../img/logo.png')} style={styles.logo_img}/>
+      <Image source={require('../img/background_splash.jpg')} style={styles.background_img} resizeMode='cover'>
+        <Image source={require('../img/logo.png')} style={styles.logo_img} resizeMode='contain'/>
       </Image>
     );
   }
@@ -39,7 +39,6 @@ var styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: 'cover',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -47,7 +46,6 @@ var styles = StyleSheet.create({
   logo_img: {
     width: 80,
     height: 80,
-    resizeMode: 'contain'
   }
 });
 
