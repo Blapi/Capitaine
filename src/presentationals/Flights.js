@@ -90,6 +90,8 @@ class Flights extends React.Component {
   render() {
     return (
       <Image source={require('../images/Flightbook_Background.jpg')} style={styles.background}>
+        {this.props.flights !== undefined && this.props.planes !== undefined
+        ?
         <ScrollView style={styles.scrollView} >
         {this.props.flights.slice(0, 8).map((flight, key)=> {
           return (
@@ -178,6 +180,9 @@ class Flights extends React.Component {
             </TouchableHighlight>)
           })}
         </ScrollView>
+        :
+        <Text style={{...styles.textCell, fontSize: 30}}>No flights</Text>
+        }
       </Image>
     )
   }
