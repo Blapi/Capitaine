@@ -1,6 +1,6 @@
 import React from 'react'
 import {Image} from 'react-native'
-import DataContainer from '../containers/DataContainer'
+import MenuContainer from '../containers/MenuContainer'
 
 const styles = {
     background: {
@@ -17,7 +17,7 @@ class Home extends React.Component {
   render() {
     return (
       <Image source={require('../images/Background.jpg')} style={styles.background}>
-        <DataContainer />
+        <MenuContainer />
       </Image>
     )
   }

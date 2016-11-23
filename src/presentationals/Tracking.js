@@ -12,6 +12,13 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 54
+  },
+  text: {
+    position: 'relative',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 16
   }
 }
 
@@ -19,7 +26,7 @@ class Tracking extends React.Component {
   render() {
     return (
       <Image source={require('../images/Tracking_Background.jpg')} style={styles.background}>
-
+        <Text style={styles.text}>WIP</Text>
       </Image>
     )
   }

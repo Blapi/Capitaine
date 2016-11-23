@@ -33,8 +33,7 @@ const styles = {
     textAlignVertical: 'center',
     textAlign: 'center',
     color: 'white',
-    fontSize: 10,
-    opacity: 1
+    fontSize: 10
   },
   smallCells: {
     flexDirection: 'row',

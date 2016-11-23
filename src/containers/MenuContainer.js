@@ -15,9 +15,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const DataContainer = connect(
+const MenuContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Menu)
 
-export default DataContainer
+export default MenuContainer

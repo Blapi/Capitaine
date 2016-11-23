@@ -1,6 +1,6 @@
 import React from 'react'
 import Drawer from 'react-native-drawer'
-import SideMenu from './SideMenu'
+import SideMenuContainer from '../containers/SideMenuContainer'
 import {Actions, DefaultRenderer} from 'react-native-router-flux'
 
 /*
@@ -18,7 +18,7 @@ class CapDrawer extends React.Component {
         onOpen={()=>Actions.refresh({key:state.key, open: true})}
         onClose={()=>Actions.refresh({key:state.key, open: false})}
         type='displace'
-        content={<SideMenu />}
+        content={<SideMenuContainer />}
         tapToClose={true}
         openDrawerOffset={0.3}
         panCloseMask={0.2}
