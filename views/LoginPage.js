@@ -35,7 +35,7 @@ class LoginPage extends Component {
   // Text input surrounded by Views to override border color smh.
   renderScene(route, navigator) {
     return (
-      <Image source={require('../img/background.jpg')} style={styles.background_img}>
+      <Image source={require('../img/background.jpg')} style={styles.background_img} resizeMode='cover'>
         <View style={styles.container}>
          <View style={{
               backgroundColor: this.state.text,
@@ -135,7 +135,6 @@ var styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: 'cover'
   },
   
   btn_text: {
