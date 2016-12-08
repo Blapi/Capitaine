@@ -11,6 +11,9 @@ import CapDrawer from './presentationals/CapDrawer'
 import Flights from './presentationals/Flights'
 import Services from './presentationals/Services'
 import Tracking from './presentationals/Tracking'
+import Welcome from './presentationals/Welcome'
+import Login from './presentationals/Login'
+import Signup from './presentationals/Signup'
 
 const ReduxRouter = connect()(Router)
 const logger = createLogger()
@@ -56,7 +59,7 @@ class Capitaine extends React.Component {
               open={false}
               tabs={true}>
               <Scene
-                key='Home'
+                key='home'
                 type={ActionConst.REPLACE}
                 component={Home}
                 hideNavBar={false}
@@ -64,8 +67,7 @@ class Capitaine extends React.Component {
                 titleStyle={styles.homeTitleStyle}
                 onLeft={() => Actions.refresh({key: 'drawer', open: value => !value})}
                 leftButtonImage={require('./images/Dot.png')}
-                leftButtonIconStyle={styles.leftButtonIconStyle}
-                initial />
+                leftButtonIconStyle={styles.leftButtonIconStyle} />
             </Scene>
             <Scene
               key='tracking'
@@ -84,6 +86,25 @@ class Capitaine extends React.Component {
               component={Services}
               hideNavBar={false}
               title='SERVICES AÉRONAUTIQUES'
+              titleStyle={styles.regularTitleStyle} />
+            <Scene
+              key='welcome'
+              component={Welcome}
+              hideNavBar={true}
+              title='CAPITAINE'
+              titleStyle={styles.regularTitleStyle}
+              initial />
+            <Scene
+              key='login'
+              component={Login}
+              hideNavBar={true}
+              title='LOGIN'
+              titleStyle={styles.regularTitleStyle} />
+            <Scene
+              key='signup'
+              component={Signup}
+              hideNavBar={true}
+              title='SIGNUP'
               titleStyle={styles.regularTitleStyle} />
           </Scene>
         </ReduxRouter>
