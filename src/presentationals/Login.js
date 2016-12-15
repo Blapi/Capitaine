@@ -16,7 +16,7 @@ import WrappedTextInput from './WrappedTextInput'
 
 var login = 'S\'identifier'.toUpperCase();
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { user: '', password: '' };
@@ -82,4 +82,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = LoginPage;
+module.exports = Login;

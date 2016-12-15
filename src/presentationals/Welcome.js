@@ -19,7 +19,7 @@ var signup = ('Créer un compte').toUpperCase();
 // Carousel defaults to full screen
 const { width, height } = Dimensions.get('window');
 
-class WelcomePage extends Component {
+class Welcome extends Component {
    constructor(props) {
     super(props);
 
@@ -157,4 +157,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = WelcomePage;
+module.exports = Welcome;

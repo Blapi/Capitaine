@@ -17,7 +17,7 @@ import WrappedTextInput from './WrappedTextInput';
 var signup = 'S\'Inscrire'.toUpperCase();
 var spacing = 10;
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { user: '', password: '', rep_password: '' };
@@ -85,4 +85,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = LoginPage;
+module.exports = Login;
