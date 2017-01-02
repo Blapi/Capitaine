@@ -9,8 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getData: () => {
-      dispatch(getData())
+    getData: (token) => {
+      dispatch(getData(token))
     }
   }
 }

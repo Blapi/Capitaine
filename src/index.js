@@ -6,6 +6,10 @@ import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux'
 import {createStore, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import rootReducer from './reducers'
+import Start from './containers/StartContainer'
+import Welcome from './presentationals/Welcome'
+import LoginContainer from './containers/LoginContainer'
+import SignupContainer from './containers/SignupContainer'
 import Home from './presentationals/Home'
 import CapDrawer from './presentationals/CapDrawer'
 import Flights from './presentationals/Flights'
@@ -31,9 +35,9 @@ const styles = {
     fontFamily: 'calibril',
     fontSize: 16
   },
-  leftButtonIconStyle: {
+  rightButtonIconStyle: {
     height: 36,
-    width: 36,
+    width: 36
   }
 }
 
@@ -49,23 +53,44 @@ class Capitaine extends React.Component {
           navigationBarStyle={styles.navigationBarStyle}>
           <Scene
             key='root'
-            hideNavBar={true}>
+            hideNavBar>
+            <Scene
+              key='start'
+              component={Start}
+              hideNavBar
+              initial />
+            <Scene
+              key='welcome'
+              component={Welcome}
+              hideNavBar />
+            <Scene
+              key='login'
+              component={LoginContainer}
+              hideNavBar={false}
+              title={`S'IDENTIFIER`}
+              titleStyle={styles.regularTitleStyle} />
+            <Scene
+              key='signup'
+              component={SignupContainer}
+              hideNavBar={false}
+              titile='CREER UN COMPTE'
+              titleStyle={styles.regularTitleStyle} />
             <Scene
               key='drawer'
               component={CapDrawer}
               open={false}
-              tabs={true}>
+              tabs>
               <Scene
-                key='Home'
+                key='home'
                 type={ActionConst.REPLACE}
                 component={Home}
                 hideNavBar={false}
                 title='Capitaine'
                 titleStyle={styles.homeTitleStyle}
-                onLeft={() => Actions.refresh({key: 'drawer', open: value => !value})}
-                leftButtonImage={require('./images/Dot.png')}
-                leftButtonIconStyle={styles.leftButtonIconStyle}
-                initial />
+                renderBackButton={() => {null}}
+                onRight={() => Actions.refresh({key: 'drawer', open: value => !value})}
+                rightButtonImage={require('./images/Dot.png')}
+                rightButtonIconStyle={styles.rightButtonIconStyle} />
             </Scene>
             <Scene
               key='tracking'

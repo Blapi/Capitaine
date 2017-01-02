@@ -1,6 +1,6 @@
 import React from 'react'
-import {View, Text, Image, TouchableHighlight, ToastAndroid} from 'react-native'
-import {Actions} from 'react-native-router-flux'
+import {View, Text, Image, TouchableHighlight, ToastAndroid, AsyncStorage} from 'react-native'
+import {Actions, ActionConst} from 'react-native-router-flux'
 import {vw, vh} from 'react-native-viewport-units'
 import {Hr} from 'react-native-hr'
 
@@ -38,6 +38,14 @@ const styles = {
   highlight: {
     width: 70*vw
   }
+}
+
+function handleDisconnect() {
+  AsyncStorage.clear()
+    .then(() => {
+      ToastAndroid.show('Déconnecté', ToastAndroid.SHORT)
+      Actions.welcome({type: ActionConst.RESET})
+    })
 }
 
 class SideMenu extends React.Component {
@@ -93,6 +101,19 @@ class SideMenu extends React.Component {
         <TouchableHighlight
           underlayColor='transparent'
           style={styles.highlight}
+          onPress={() => handleDisconnect()}>
+          <View style={styles.cell}>
+            <Text style={styles.text}>DÉCONNEXION</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+}
+/*
+        <TouchableHighlight
+          underlayColor='transparent'
+          style={styles.highlight}
           onPress={() => ToastAndroid.show('WIP', ToastAndroid.SHORT)}>
           <View style={styles.cell}>
             <Text style={styles.text}>PARAMÈTRES</Text>
@@ -106,17 +127,6 @@ class SideMenu extends React.Component {
             <Text style={styles.text}>AIDE</Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight
-          underlayColor='transparent'
-          style={styles.highlight}
-          onPress={() => ToastAndroid.show('WIP', ToastAndroid.SHORT)}>
-          <View style={styles.cell}>
-            <Text style={styles.text}>DÉCONNEXION</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
-    )
-  }
-}
+*/
 
 export default SideMenu

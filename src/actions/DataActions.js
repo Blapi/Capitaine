@@ -1,7 +1,7 @@
 import config from '../config/config'
 import {jsonFetch} from '../utils/easyFetch'
 
-const { clientId, clientSecret, url, testToken } = config.api
+const { clientId, clientSecret, url } = config.api
 
 export const REQUEST_START = 'REQUEST_START'
 export const REQUEST_END = 'REQUEST_END'
@@ -19,22 +19,22 @@ function asyncDataFinished(result) {
   }
 }
 
-export function getData() {
+export function getData(token) {
   return dispatch => {
     dispatch(asyncDataStarted())
   return Promise.all([
-    jsonFetch(`${url}/api/flight`)
-      .setHeaders({Authorization: `Bearer ${testToken}`})
+    jsonFetch(`${url}/api/flights`)
+      .setHeaders({Authorization: `Bearer ${token}`})
       .get()
       .then(response => Promise.resolve({flights: response}))
       .catch(error => console.log(error)),
-    jsonFetch(`${url}/api/plane`)
-      .setHeaders({Authorization: `Bearer ${testToken}`})
+    jsonFetch(`${url}/api/planes`)
+      .setHeaders({Authorization: `Bearer ${token}`})
       .get()
       .then(response => Promise.resolve({planes: response}))
       .catch(error => console.log(error)),
     jsonFetch(`${url}/api/airfields`)
-      .setHeaders({Authorization: `Bearer ${testToken}`})
+      .setHeaders({Authorization: `Bearer ${token}`})
       .get()
       .then(response => Promise.resolve({airfields: response}))
       .catch(error => console.log(error))
@@ -43,6 +43,5 @@ export function getData() {
     var data = {}
     values.map(value => data = {...data, ...value})
     dispatch(asyncDataFinished(data))
-  })
-  }
+  })}
 }

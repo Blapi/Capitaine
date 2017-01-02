@@ -88,11 +88,12 @@ const styles = {
 class Flights extends React.Component {
   render() {
     return (
-      <Image source={require('../images/Flightbook_Background.jpg')} style={styles.background}>
+      <Image
+        source={require('../images/Flightbook_Background.jpg')}
+        style={styles.background}>
         {this.props.flights !== undefined && this.props.planes !== undefined
-        ?
-        <ScrollView style={styles.scrollView} >
-        {this.props.flights.slice(0, 8).map((flight, key)=> {
+        ? <ScrollView style={styles.scrollView} >
+          {this.props.flights.slice(0, 8).map((flight, key)=> {
           return (
             <TouchableHighlight
               key={key}
@@ -100,49 +101,55 @@ class Flights extends React.Component {
               onPress={() => console.log(flight)}>
               <View style={styles.flightList} >
                 <TouchableHighlight
-                  onLongPress={() => ToastAndroid.show('Date and Role', ToastAndroid.SHORT)}
+                  onLongPress={() => ToastAndroid.show('Date et rôle', ToastAndroid.SHORT)}
                   onPress={() => console.log(flight)}
                   underlayColor='transparent'
                   style={{width:styles.dateCell.width + vw, height:styles.dateCell.height + vw, opacity: 0.8}}>
                   <View style={{...styles.dateCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                    <Image source={require('../images/Icon_clock.png')} style={styles.icon}/>
+                    <Image
+                      source={require('../images/Icon_clock.png')}
+                      style={styles.icon}/>
                     <Text style={styles.textCell}>{moment(flight.date, 'YYYY-MM-DD').format('DD/MM/YYYY')}</Text>
                     {flight.role === 'EP'
-                    ?
-                    <Image source={require('../images/Icon_twoUsers.png')} style={styles.icon}/>
-                    :
-                    <Image source={require('../images/Icon_oneUser.png')} style={styles.icon}/>}
+                    ? <Image
+                      source={require('../images/Icon_twoUsers.png')}
+                      style={styles.icon}/>
+                    : <Image
+                      source={require('../images/Icon_oneUser.png')}
+                      style={styles.icon}/>}
                     <Text style={styles.textCell}>{flight.role}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  onLongPress={() => ToastAndroid.show('Plane informations', ToastAndroid.SHORT)}
+                  onLongPress={() => ToastAndroid.show(`Informations sur l'avion`, ToastAndroid.SHORT)}
                   onPress={() => console.log(flight)}
                   underlayColor='transparent'
                   style={{width:styles.planeCell.width + vw, height:styles.planeCell.height + vw, opacity: 0.8}} >
                   <View style={{...styles.planeCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
-                    <Image source={require('../images/Icon_plane.png')} style={styles.icon}/>
-                    {this.props.planes.map((plane, key) => {
-                      if (plane.id === flight.plane) {
-                        return (<Text key={key} style={styles.textCell}>{plane.type.type}{'\n'}{plane.registration}</Text>)
-                      }
-                    })}
+                    <Image
+                      source={require('../images/Icon_plane.png')}
+                      style={styles.icon}/>
+                      <Text style={styles.textCell}>{flight.plane.type}{'\n'}{flight.plane.registration}</Text>
                   </View>
                 </TouchableHighlight>
                 <View style={styles.smallCells}>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Time of the day', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show('Période de la journée', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
                     style={{width:styles.roleCell.width + vw, height:styles.roleCell.height + vw, opacity: 0.8}}>
                     <View style={{...styles.roleCell, backgroundColor:colors[key%colors.length], borderColor:colors[key%colors.length]}}>
                       {flight.day_landing !== undefined
-                      ? <Image source={require('../images/Icon_sun.png')} style={styles.icon}/>
-                      : <Image source={require('../images/Icon_moon.png')} style={styles.icon}/>}
+                      ? <Image
+                        source={require('../images/Icon_sun.png')}
+                        style={styles.icon}/>
+                      : <Image
+                        source={require('../images/Icon_moon.png')}
+                        style={styles.icon}/>}
                     </View>
                   </TouchableHighlight>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Flight duration', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show('Temps de vol', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
                     style={{width:styles.flightTimeCell.width + vw, height:styles.flightTimeCell.height + vw, opacity: 0.8}}>
@@ -157,7 +164,7 @@ class Flights extends React.Component {
                     </View>
                   </TouchableHighlight>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Type', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show('Type de vol', ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
                     style={{width:styles.typeCell.width + vw, height:styles.typeCell.height + vw, opacity: 0.8}}>
@@ -166,7 +173,7 @@ class Flights extends React.Component {
                     </View>
                   </TouchableHighlight>
                   <TouchableHighlight
-                    onLongPress={() => ToastAndroid.show('Landing', ToastAndroid.SHORT)}
+                    onLongPress={() => ToastAndroid.show(`Nombre d'atterrissages`, ToastAndroid.SHORT)}
                     onPress={() => console.log(flight)}
                     underlayColor='transparent'
                     style={{width:styles.landingCell.width + vw, height:styles.landingCell.height + vw, opacity: 0.8}}>
@@ -179,8 +186,7 @@ class Flights extends React.Component {
             </TouchableHighlight>)
           })}
         </ScrollView>
-        :
-        <Text style={{...styles.textCell, fontSize: 30}}>No flights</Text>
+        : <Text style={{...styles.textCell, fontSize: 30}}>No flights</Text>
         }
       </Image>
     )
