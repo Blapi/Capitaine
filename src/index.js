@@ -6,15 +6,17 @@ import {Router, Scene, Actions, ActionConst} from 'react-native-router-flux'
 import {createStore, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import rootReducer from './reducers'
-import Start from './containers/StartContainer'
+import StartContainer from './containers/StartContainer'
 import Welcome from './presentationals/Welcome'
 import LoginContainer from './containers/LoginContainer'
 import SignupContainer from './containers/SignupContainer'
 import Home from './presentationals/Home'
 import CapDrawer from './presentationals/CapDrawer'
+import Stats from './presentationals/Stats'
 import Flights from './presentationals/Flights'
 import Services from './presentationals/Services'
 import Tracking from './presentationals/Tracking'
+import FlightContainer from './containers/FlightContainer'
 
 const ReduxRouter = connect()(Router)
 const logger = createLogger()
@@ -56,7 +58,7 @@ class Capitaine extends React.Component {
             hideNavBar>
             <Scene
               key='start'
-              component={Start}
+              component={StartContainer}
               hideNavBar
               initial />
             <Scene
@@ -93,22 +95,37 @@ class Capitaine extends React.Component {
                 rightButtonIconStyle={styles.rightButtonIconStyle} />
             </Scene>
             <Scene
-              key='tracking'
-              component={Tracking}
+              key='stats'
+              component={Stats}
               hideNavBar={false}
-              title='SUIVI EN TEMPS RÉEL'
+              title='STATISTIQUES'
               titleStyle={styles.regularTitleStyle} />
             <Scene
               key='flightbook'
               component={Flights}
               hideNavBar={false}
               title='CARNET DE VOL'
-              titleStyle={styles.regularTitleStyle} />
+              titleStyle={styles.regularTitleStyle} 
+              onRight={() => Actions.flight()}
+              rightButtonImage={require('./images/Bell.png')}
+              rightButtonIconStyle={styles.rightButtonIconStyle} />
             <Scene
               key='services'
               component={Services}
               hideNavBar={false}
               title='SERVICES AÉRONAUTIQUES'
+              titleStyle={styles.regularTitleStyle} />
+            <Scene
+              key='flight'
+              component={FlightContainer}
+              hideNavBar={false}
+              title={`AJOUT D'UN VOL`}
+              titleStyle={styles.regularTitleStyle} />
+            <Scene
+              key='tracking'
+              component={Tracking}
+              hideNavBar={false}
+              title='SUIVI EN TEMPS RÉEL'
               titleStyle={styles.regularTitleStyle} />
           </Scene>
         </ReduxRouter>

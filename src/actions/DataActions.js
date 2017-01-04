@@ -19,6 +19,10 @@ function asyncDataFinished(result) {
   }
 }
 
+export function addFlight() {
+  
+}
+
 export function getData(token) {
   return dispatch => {
     dispatch(asyncDataStarted())

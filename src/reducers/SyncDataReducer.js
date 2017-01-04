@@ -4,7 +4,8 @@ const initialState = {
 	requesting: false,
 	flights: {},
 	planes: {},
-	airfields: {}
+	airfields: {},
+	stats: {}
 }
 
 function syncDataReducer(state = initialState, action) {
@@ -12,7 +13,7 @@ function syncDataReducer(state = initialState, action) {
 		case REQUEST_START:
 			return {...state, requesting: true}
 		case REQUEST_END:
-			return {...state, requesting: false, flights: action.result.flights, planes: action.result.planes, airfields: action.result.airfields}
+			return {...state, requesting: false, flights: action.result.flights, planes: action.result.planes, airfields: action.result.airfields, stats: action.result.stats}
 		default:
 			return state
     }

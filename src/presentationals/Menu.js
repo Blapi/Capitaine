@@ -57,11 +57,11 @@ class Menu extends React.Component {
         : <View>
             <TouchableHighlight
               style={styles.flexElement}
-              onPress={() => Actions.tracking()}>
+              onPress={() => Actions.stats()}>
               <Image
                 source={require('../images/Home_suivi.jpg')}
                 style={styles.image}>
-                <Text style={styles.text}>SUIVI EN TEMPS RÉEL</Text>
+                <Text style={styles.text}>STATISTIQUES</Text>
               </Image>
             </TouchableHighlight>
             <TouchableHighlight
@@ -75,7 +75,7 @@ class Menu extends React.Component {
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.flexElement}
-              onPress={() => Actions.services()}>
+              onPress={() => Actions.services({airfields: this.props.airfields})}>
               <Image
                 source={require('../images/Home_service.jpg')}
                 style={styles.image}>

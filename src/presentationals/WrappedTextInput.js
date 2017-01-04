@@ -1,7 +1,6 @@
 import React from 'react'
 import {View, TextInput} from 'react-native'
 
-// A TextInput surrounded by Views to override border color smh.
 class WrappedTextInput extends React.Component {
   render() {
     return (
@@ -10,6 +9,7 @@ class WrappedTextInput extends React.Component {
           style={{...this.props.style, height: 50, color: 'white', borderBottomColor: 'transparent'}}
           onChangeText={this.props.onChangeText}
           autoCorrect={false}
+          underlineColorAndroid='transparent'
           placeholder={this.props.placeholder}
           placeholderTextColor={'#ffffffbb'}
           secureTextEntry={this.props.secureTextEntry}

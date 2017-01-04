@@ -64,19 +64,10 @@ class SideMenu extends React.Component {
         <TouchableHighlight
           underlayColor='transparent'
           style={styles.highlight}
-          onPress={() => ToastAndroid.show('WIP', ToastAndroid.SHORT)}>
+          onPress={() => Actions.stats()}>
           <View style={styles.cell}>
             <Image source={require('../images/User.png')} style={styles.image}/>
-            <Text style={styles.text}>PROFIL</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
-          underlayColor='transparent'
-          style={styles.highlight}
-          onPress={() => Actions.tracking()}>
-          <View style={styles.cell}>
-            <Image source={require('../images/Marker.png')} style={styles.image}/>
-            <Text style={styles.text}>SUIVI</Text>
+            <Text style={styles.text}>STATISTIQUES</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight
@@ -91,7 +82,7 @@ class SideMenu extends React.Component {
         <TouchableHighlight
           underlayColor='transparent'
           style={styles.highlight}
-          onPress={() => Actions.services()}>
+          onPress={() => Actions.services({airfields: this.props.airfields})}>
           <View style={styles.cell}>
             <Image source={require('../images/Loop.png')} style={styles.image}/>
             <Text style={styles.text}>SERVICES</Text>
@@ -110,23 +101,5 @@ class SideMenu extends React.Component {
     )
   }
 }
-/*
-        <TouchableHighlight
-          underlayColor='transparent'
-          style={styles.highlight}
-          onPress={() => ToastAndroid.show('WIP', ToastAndroid.SHORT)}>
-          <View style={styles.cell}>
-            <Text style={styles.text}>PARAMÈTRES</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
-          underlayColor='transparent'
-          style={styles.highlight}
-          onPress={() => ToastAndroid.show('WIP', ToastAndroid.SHORT)}>
-          <View style={styles.cell}>
-            <Text style={styles.text}>AIDE</Text>
-          </View>
-        </TouchableHighlight>
-*/
 
 export default SideMenu
