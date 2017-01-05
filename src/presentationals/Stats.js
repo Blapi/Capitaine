@@ -15,11 +15,6 @@ const styles = {
     alignItems: 'center',
     marginTop: 54
   },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },  
   mainView: {
     flex: 1,
     flexDirection: 'column',
@@ -37,7 +32,7 @@ const styles = {
   dataView: {
     marginTop: 3 * vh,
     backgroundColor: '#000',
-    height: 12 * vh,
+    height: 10 * vh,
     width: 90 * vw,
     opacity: 0.6,
     flexDirection: 'column'
@@ -78,31 +73,43 @@ const styles = {
     fontFamily: 'calibril',
     fontSize: 14
   },
-  highlight: {
-    opacity: 0.8
-  },
-  textModal: {
-    flex: 1,
-    marginTop: 10 * vh,
+  textCell: {
     color: 'white',
     fontFamily: 'calibril',
     textAlign: 'center',
+    fontSize: 10
+  },
+  row: {
+    margin: 0,
+    padding: 0,
+    flexDirection: 'row',
+  },
+  cell: {
+    margin: 0,
+    width: 22.5*vw,
+    height: 15*vw,
     justifyContent: 'center',
-    fontSize: 12
+    flexWrap: 'wrap'
   },
-  textSelected: {
-    color: 'white',
-    fontFamily: 'calibril',
-    fontSize: 14,
-    opacity: 0.8
+  topCell: {
+    borderTopWidth: 1,
+    borderTopColor: 'white'
   },
-  textOption: {
-    fontFamily: 'calibril',
-    fontSize: 16
-  }
+  leftCell: {
+    borderLeftWidth: 1,
+    borderLeftColor: 'white'
+  },
+  rightCell: {
+    borderRightWidth: 1,
+    borderRightColor: 'white'
+  },
+  bottomCell: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'white'
+  },
 }
 
-class Services extends React.Component {
+class Stats extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -132,8 +139,118 @@ class Services extends React.Component {
             onRequestClose={() => {this.setModalTimeVisible(!this.state.modalTimeVisible)}}>
             <View style={styles.modalView}>
               <Text style={styles.title}>STATISTIQUES DE TEMPS DE VOL</Text>
-              <Text style={styles.textModal}>
-              </Text>
+              <View style={{...styles.mainView, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Type
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Temps de vol au total
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Temps de vol en double commande
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Temps de vol en commandant de bord
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Depuis le premier vol
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.total_flight_time} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.total_flight_time_alone} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.total_flight_time_double} minutes
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Ces 3 derniers mois
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flight_time} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flight_time_alone} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flight_time_double} minutes
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      Dans la dernière année
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flight_time} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flight_time_alone} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flight_time_double} minutes
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      Depuis l'obtention de la license (CPL, PPL)
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flight_time} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flight_time_alone} minutes
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flight_time_double} minutes
+                    </Text>
+                  </View>
+                </View>
+              </View>
               <TouchableHighlight
                 underlayColor='transparent'
                 style={styles.highlight}
@@ -149,8 +266,118 @@ class Services extends React.Component {
             onRequestClose={() => {this.setModalNumberVisible(!this.state.modalNumberVisible)}}>
             <View style={styles.modalView}>
               <Text style={styles.title}>STATISTIQUES DE NOMBRE DE VOLS</Text>
-              <Text style={styles.textModal}>
-              </Text>
+              <View style={{...styles.mainView, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Type
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Nombre de vols au total
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Nombre de vols en double commande
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Nombre de vols en commandant de bord
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Depuis le premier vol
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.flights_nb}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.flights_nb_double}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.flights_nb_alone}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      Ces 3 derniers mois
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flights_nb}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flights_nb_double}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_3m_flights_nb_alone}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      Dans la dernière année
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flights_nb}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flights_nb_double}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.last_year_flights_nb_alone}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.leftCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      Depuis l'obtention de la license (CPL, PPL)
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flights_nb}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flights_nb_double}
+                    </Text>
+                  </View>
+                  <View style={{...styles.cell, ...styles.topCell, ...styles.rightCell, ...styles.bottomCell}}>
+                    <Text style={styles.textCell}>
+                      {this.props.stats.since_license_flights_nb_alone}
+                    </Text>
+                  </View>
+                </View>
+              </View>
               <TouchableHighlight
                 underlayColor='transparent'
                 style={styles.highlight}
@@ -162,25 +389,28 @@ class Services extends React.Component {
           <View style={styles.dataView}>
             <Text style={styles.title}>TEMPS DE VOL MOYEN PAR MOIS</Text>
             <Text style={styles.text}>
-              {}
+              {this.props.stats.avg_flight_time_per_month} minutes
             </Text>
           </View>
           <View style={styles.dataView}>
             <Text style={styles.title}>PRIX TOTAL DES VOLS EFFECTUÉS</Text>
             <Text style={styles.text}>
-              {}
+              {Math.round(parseFloat(this.props.stats.total_flights_cost) * 100) / 100} €
             </Text>
           </View>
           <View style={styles.dataView}>
             <Text style={styles.title}>NOMBRE TOTAL DE VOLS</Text>
             <Text style={styles.text}>
-              {}
+              {this.props.stats.flights_nb} vols
             </Text>
           </View>
-          <View style={styles.dataView}>
+          <View style={{...styles.dataView, height: 20*vh}}>
             <Text style={styles.title}>AÉRODROMES VISITÉS</Text>
             <Text style={styles.text}>
-              {}
+              {this.props.stats.visited_airfields.length !== 0
+              ? this.props.stats.visited_airfields.reduce((a, b) => { return (`${a}, ${b.name}`) }, this.props.stats.visited_airfields[0].name)
+              : 'Aucun aérodrome visité'
+              }
             </Text>
           </View>
           <TouchableHighlight
@@ -205,4 +435,4 @@ class Services extends React.Component {
   }
 }
 
-export default Services
+export default Stats

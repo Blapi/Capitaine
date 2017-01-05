@@ -37,7 +37,6 @@ class Menu extends React.Component {
   componentWillMount() {
     AsyncStorage.getItem('access_token')
     .then(value => {
-      console.log(value)
       this.props.getData(value)
     })
   }
@@ -57,7 +56,7 @@ class Menu extends React.Component {
         : <View>
             <TouchableHighlight
               style={styles.flexElement}
-              onPress={() => Actions.stats()}>
+              onPress={() => Actions.stats({stats: this.props.stats})}>
               <Image
                 source={require('../images/Home_suivi.jpg')}
                 style={styles.image}>

@@ -41,6 +41,11 @@ export function getData(token) {
       .setHeaders({Authorization: `Bearer ${token}`})
       .get()
       .then(response => Promise.resolve({airfields: response}))
+      .catch(error => console.log(error)),
+    jsonFetch(`${url}/api/stats`)
+      .setHeaders({Authorization: `Bearer ${token}`})
+      .get()
+      .then(response => Promise.resolve({stats: response}))
       .catch(error => console.log(error))
     ])
   .then(values => {

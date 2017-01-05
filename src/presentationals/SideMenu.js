@@ -64,7 +64,7 @@ class SideMenu extends React.Component {
         <TouchableHighlight
           underlayColor='transparent'
           style={styles.highlight}
-          onPress={() => Actions.stats()}>
+          onPress={() => Actions.stats({stats: this.props.stats})}>
           <View style={styles.cell}>
             <Image source={require('../images/User.png')} style={styles.image}/>
             <Text style={styles.text}>STATISTIQUES</Text>
